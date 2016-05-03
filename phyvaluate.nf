@@ -41,7 +41,7 @@ fastas = Channel
 
 ref_trees = Channel
     .fromPath( params.ref_trees )
-    .ifEmpty { error "Cannot find any input sequence files matching: ${params.ref_tree}" }
+    .ifEmpty { error "Cannot find any input sequence files matching: ${params.ref_trees}" }
     .map { file -> tuple( file.baseName, file ) }
 
 
