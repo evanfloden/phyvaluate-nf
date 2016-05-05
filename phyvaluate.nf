@@ -35,17 +35,18 @@ aligner                 = params.aligner
  */
  
 
-fastas = Channel
+Channel
     .fromPath( params.input )
     .ifEmpty { error "Cannot find any input sequence files matching: ${params.input}" }
     .map { file -> tuple( file.baseName, file ) }
     .into {fastas_1; fastas_2}
 
 
-ref_trees = Channel
+ Channel
     .fromPath( params.ref_trees )
     .ifEmpty { error "Cannot find any input sequence files matching: ${params.ref_trees}" }
     .map { file -> tuple( file.baseName, file ) }
+    .set { ref_trees }
 
 
 process align {
@@ -88,7 +89,6 @@ process alignUPP {
   """
 }
 
-
 process compare_tree {
     publishDir "$results_path/$aligner/$datasetID/compare", mode: 'copy', overwrite: 'true'
 
@@ -98,9 +98,9 @@ process compare_tree {
     set val(datasetID), file(ref_tree) from ref_trees
 
     output:
-    set val(datasetID), file('compareTree_${datasetID}_mega.txt'), file ('compareTree_${datasetID}_upp.txt')
-    file (result.txt) into result_txts
-
+//    set val(datasetID), file('compareTree_${datasetID}_mega.txt'), file ('compareTree_${datasetID}_upp.txt') into something
+    file 'result.txt' into result_txts
+	
     script:
     //
     // Compare the Reference Tree to the Aligner Tree
