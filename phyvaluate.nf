@@ -85,8 +85,8 @@ process alignUPP {
   
   script:
   """
-      run_upp.py -s ${fasta} -m amino --cpu ${task.cpus} -i ${fasta} -d ${fasta} -o ${datasetID}_upp.aln
-      cp ${fasta}/pasta.fasttree ${datasetID}_upp.nwk
+      run_upp.py -s ${fasta} -m amino --cpu ${task.cpus} -d ${datasetID} -o ${datasetID}_upp.aln
+      cp ${datasetID}/pasta.fasttree ${datasetID}_upp.nwk
   """
 }
 
