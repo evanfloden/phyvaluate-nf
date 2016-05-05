@@ -80,8 +80,8 @@ process alignUPP {
       set val(datasetID), file(fasta) from fastas_1
 
   output:
-      set val(datasetID), file "${datasetID}_upp.aln" into upp_alignments
-      set val(datasetID), file "${datasetID}_upp.nwk" into upp_trees
+      set val(datasetID), file ("${datasetID}_upp.aln") into upp_alignments
+      set val(datasetID), file("${datasetID}_upp.nwk") into upp_trees
   
   script:
   """
