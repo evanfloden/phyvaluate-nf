@@ -106,24 +106,27 @@ process compare_tree {
     // Compare the Reference Tree to the Aligner Tree
     //
     """
-        CompareTree.pl -tree ${predicted_tree} \
-                       -versus ${ref_tree} > 'compareTree_${datasetID}_mega.txt'
- 
-        CompareTree.pl -tree ${predicted_upp_tree} \
-                       -versus ${ref_tree} > 'compareTree_${datasetID}_upp.txt'
 
-        mega=\$(cat compareTree_${datasetID}_mega.txt)
-        upp=\$(cat compareTree_${datasetID}_upp.txt)
+        ete3 compare -t ${predicted_tree} -r ${ref_tree} --unrooted
 
-        regex="frac\t([0-9]+.[0-9]+)"
 
-        [[ \$mega =~ \$regex ]]
-        RF_mega="\${BASH_REMATCH[1]}"
+        ete3 compare -t ${predicted_upp_tree} -r ${ref_tree} --unrooted
 
-        [[ \$upp  =~ \$regex ]]
-        RF_upp="{BASH_REMATCH[1]}"
+        #CompareTree.pl -tree ${predicted_upp_tree} \
+        #               -versus ${ref_tree} > 'compareTree_${datasetID}_upp.txt'
 
-        echo "\$RF_mega\t\$RF_upp" > result.txt
+        #mega=\$(cat compareTree_${datasetID}_mega.txt)
+        #upp=\$(cat compareTree_${datasetID}_upp.txt)
+
+        #regex="frac\t([0-9]+.[0-9]+)"
+
+        #[[ \$mega =~ \$regex ]]
+        #RF_mega="\${BASH_REMATCH[1]}"
+
+        #[[ \$upp  =~ \$regex ]]
+        #RF_upp="{BASH_REMATCH[1]}"
+
+        #echo "\$RF_mega\t\$RF_upp" > result.txt
 
     """
 }

@@ -689,8 +689,23 @@ sub Compare($$) {
 	if ($n1 == 1) {
 	    my $id = $t1->id($node1);
 	    my $node2 = $leaf2{$id};
-	    die "id $id in 1st tree is not in second tree" unless defined $node2;
-	    $match{$node1} = [$node2,1,$n1];
+
+	    unless (defined $node2) {print "|$id|\n";my @leaf2contains = keys(%leaf2); 
+
+	    my $flag=0;
+            foreach my $id2 (@leaf2contains) {
+            
+		if($id eq $id2){
+			my $node2=$id2;
+			$flag=1;
+		}
+	    }
+            print "$node2\n";
+            
+	    if($flag==0){	
+            die "id $id in 1st tree is not in second tree. Found: @leaf2contains\n";} 
+	   }  
+	   $match{$node1} = [$node2,1,$n1];
 	    $matchReverse{$node2} = [$node1,1];
 	    my $a1 = $t1->ancestor($node1);
 	    my $a2 = $t2->ancestor($node2);

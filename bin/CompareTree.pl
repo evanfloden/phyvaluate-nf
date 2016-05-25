@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 # Compares bootstrap and length for splits that match
 use strict;
-use lib "$ENV{HOME}/Genomics/Perl/modules";
+#use lib "$ENV{HOME}/Genomics/Perl/modules";
 use MOTree;
 use Getopt::Long;
 
