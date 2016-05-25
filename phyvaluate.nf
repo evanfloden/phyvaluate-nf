@@ -98,7 +98,7 @@ process compare_tree {
     set val(datasetID), file(ref_tree) from ref_trees
 
     output:
-//    set val(datasetID), file('compareTree_${datasetID}_mega.txt'), file ('compareTree_${datasetID}_upp.txt') into something
+    set val(datasetID), file('compareTree_${datasetID}_mega.txt'), file ('compareTree_${datasetID}_upp.txt') into something
     file 'result.txt' into result_txts
 	
     script:
@@ -107,16 +107,15 @@ process compare_tree {
     //
     """
 
-        ete3 compare -t ${predicted_tree} -r ${ref_tree} --unrooted
+        ete3 compare -t ${predicted_tree} -r ${ref_tree} --unrooted > 'compareTree_${datasetID}_mega.txt'
+
+        echo '\n';
+
+        ete3 compare -t ${predicted_upp_tree} -r ${ref_tree} --unrooted > 'compareTree_${datasetID}_upp.txt'
 
 
-        ete3 compare -t ${predicted_upp_tree} -r ${ref_tree} --unrooted
-
-        #CompareTree.pl -tree ${predicted_upp_tree} \
-        #               -versus ${ref_tree} > 'compareTree_${datasetID}_upp.txt'
-
-        #mega=\$(cat compareTree_${datasetID}_mega.txt)
-        #upp=\$(cat compareTree_${datasetID}_upp.txt)
+        mega=\$(cat compareTree_${datasetID}_mega.txt)
+        upp=\$(cat compareTree_${datasetID}_upp.txt)
 
         #regex="frac\t([0-9]+.[0-9]+)"
 
@@ -126,7 +125,7 @@ process compare_tree {
         #[[ \$upp  =~ \$regex ]]
         #RF_upp="{BASH_REMATCH[1]}"
 
-        #echo "\$RF_mega\t\$RF_upp" > result.txt
+        echo "\$RF_mega\t\$RF_upp" > result.txt
 
     """
 }
