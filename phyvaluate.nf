@@ -70,6 +70,8 @@ process align {
                     -n ${task.cpus} \
                     --phylo_out "${datasetID}_prediction.nwk" \
                     -d
+                    
+        rm -r debug_folder            
     """
 }
 
