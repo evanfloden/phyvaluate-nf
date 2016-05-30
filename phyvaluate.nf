@@ -117,15 +117,7 @@ process compare_tree {
         mega=\$(cat compareTree_${datasetID}_mega.txt)
         upp=\$(cat compareTree_${datasetID}_upp.txt)
 
-        #regex="frac\t([0-9]+.[0-9]+)"
-
-        #[[ \$mega =~ \$regex ]]
-        #RF_mega="\${BASH_REMATCH[1]}"
-
-        #[[ \$upp  =~ \$regex ]]
-        #RF_upp="{BASH_REMATCH[1]}"
-
-        echo "\$RF_mega\t\$RF_upp" > result.txt
+        echo "\$mega\$upp" > result.txt
 
     """
 }
