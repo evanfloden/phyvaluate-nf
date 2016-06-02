@@ -119,8 +119,11 @@ process compare_tree {
         mega=\$(cat compareTree_${datasetID}_mega.txt)
         upp=\$(cat compareTree_${datasetID}_upp.txt)
 
-        echo "\$mega\$upp" > result.txt
-
+	echo "mega" > result.txt
+        echo "\$mega" >> result.txt
+        echo "upp" >> result.txt
+        echo "\$upp" >> result.txt
+        echo "" >> result.txt
     """
 }
 
