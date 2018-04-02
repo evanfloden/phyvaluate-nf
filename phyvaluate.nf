@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 /* 
  * Main phyvaluate-NF pipeline script
  *
